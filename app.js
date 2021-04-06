@@ -1,30 +1,5 @@
 const inquirer = require('inquirer');
-// const fs = require('fs');
-// const generatePage = require('./src/page-template.js');
-// const pageHTML = generatePage(name, github);
-// const [name, github] = profileDataArgs
 
-
-// fs.writeFile('./index.html', pageHTML, err => {
-//   if (err) throw new Error(err);
-
-//   console.log('Portfolio complete! Check out index.html to see the output!')
-// })
-
-
-// const printProfileData = profileDataArr => {
-//   // this ...
-//   for(let i = 0; i < profileDataArr.length; i++) {
-//     console.log(profileDataArr[i]);
-//   }
-//   console.log('====================');
-
-//   // Is the same as this....
-//   profileDataArr.forEach((profileItem) => console.log(profileItem));
-
-// };
-
-// printProfileData(profileDataArgs);
 const promptUser = () => {
   return inquirer.prompt([
     {
@@ -48,15 +23,28 @@ const promptUser = () => {
         if (nameInput) {
           return true;
         } else {
-          console.log('Please enter your name!');
+          console.log('Please enter your GitHub Username!');
           return false;
         }
       }
     },
     {
+      type: 'confirm',
+      name: 'confirmAbout',
+      message: 'Would you like to enter some information about yourself for an "About" section?',
+      default: true
+    },
+    {
       type: 'input',
       name: 'about',
-      message: 'Provide some information about yourself:'
+      message: 'Provide some information about yourself:',
+      when: ({confirmAbout}) => {
+        if (confirmAbout) {
+          return true;
+        } else {
+          return false;
+        }
+      }
     }
   ]);
   
@@ -81,7 +69,7 @@ const promptProject = portfolioData => {
         if (nameInput) {
           return true;
         } else {
-          console.log('Please enter your name!');
+          console.log('Please enter your project name!');
           return false;
         }
       }
@@ -94,7 +82,7 @@ const promptProject = portfolioData => {
         if (nameInput) {
           return true;
         } else {
-          console.log('Please enter your name!');
+          console.log('Please enter your description!');
           return false;
         }
       }
@@ -113,7 +101,7 @@ const promptProject = portfolioData => {
         if (nameInput) {
           return true;
         } else {
-          console.log('Please enter your name!');
+          console.log('Please enter your link!');
           return false;
         }
       }
